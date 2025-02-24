@@ -3,38 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Metabolismo Basal</title>
+    <title>Calculadora de Calorias do Programa Transformação</title>
     <style>
+        /* Estilos Gerais */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f4;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
-            max-width: 400px;
-            margin: auto;
+            max-width: 450px;
+            margin: 50px auto;
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #28a745; /* Verde */
         }
-        input, select, button {
+
+        h2 {
+            color: #000; /* Preto */
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            text-align: left;
+            margin: 10px 0 5px;
+            color: #000; /* Preto */
+        }
+
+        input, select {
             width: 100%;
-            margin: 10px 0;
-            padding: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
         }
+
+        input:focus, select:focus {
+            border-color: #28a745; /* Verde */
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745; /* Verde */
+            color: white;
+            font-size: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Verde mais escuro */
+        }
+
         .resultado {
             margin-top: 20px;
+            padding: 15px;
+            background: #28a745; /* Verde */
+            color: white;
+            border-radius: 10px;
+            font-size: 18px;
             font-weight: bold;
+            display: none; /* Inicialmente escondido */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Calculadora de Metabolismo Basal</h2>
+        <h2>Calculadora de Calorias do Programa Transformação</h2>
         
         <label for="sexo">Sexo:</label>
         <select id="sexo">
@@ -74,7 +124,9 @@
             let atividade = parseFloat(document.getElementById("atividade").value);
 
             if (isNaN(peso) || isNaN(altura) || isNaN(idade)) {
-                document.getElementById("resultado").innerHTML = "Por favor, preenche todos os campos corretamente.";
+                document.getElementById("resultado").innerHTML = "⚠️ Por favor, preenche todos os campos corretamente.";
+                document.getElementById("resultado").style.display = "block";
+                document.getElementById("resultado").style.background = "#dc3545"; /* Vermelho de alerta */
                 return;
             }
 
@@ -91,11 +143,13 @@
             let ganhar = tmt + 300;
 
             document.getElementById("resultado").innerHTML = `
-                <p><strong>Metabolismo Basal (TMB):</strong> ${Math.round(tmb)} kcal</p>
-                <p><strong>Gasto diário total:</strong> ${Math.round(tmt)} kcal</p>
-                <p><strong>Para emagrecer:</strong> entre ${Math.round(emagrecer)} e ${Math.round(emagrecer - 200)} kcal</p>
-                <p><strong>Para ganhar peso:</strong> entre ${Math.round(ganhar)} e ${Math.round(ganhar + 200)} kcal</p>
+                <p>📌 <strong>Metabolismo Basal (TMB):</strong> ${Math.round(tmb)} kcal</p>
+                <p>🔥 <strong>Gasto diário total:</strong> ${Math.round(tmt)} kcal</p>
+                <p>⚖️ <strong>Para emagrecer:</strong> entre ${Math.round(emagrecer)} e ${Math.round(emagrecer - 200)} kcal</p>
+                <p>💪 <strong>Para ganhar peso:</strong> entre ${Math.round(ganhar)} e ${Math.round(ganhar + 200)} kcal</p>
             `;
+            document.getElementById("resultado").style.display = "block";
+            document.getElementById("resultado").style.background = "#28a745"; /* Verde */
         }
     </script>
 
